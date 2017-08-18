@@ -83,7 +83,7 @@ function triggerAdjustment() {
     if (differencePercentage < biddingBands[i].upperBound) {
       if (biddingBands[i].upperBound !== currentBidAdjBand) {
         console.log('BIDDING BAND', biddingBands[i].upperBound);
-        console.log('ADJUSTMENT', biddingBands[i].adjustment + '00%');
+        console.log('ADJUSTMENT', biddingBands[i].adjustment * 100 +'%');
         adjustAllBids(accessToken,biddingBands[i].adjustment);
         currentBidAdjBand = biddingBands[i].upperBound;
       }
@@ -99,8 +99,7 @@ function setCurrentTransactions(currentDailyCount) {
 function adjustAllBids(accessToken,percentAdjustment) {
   Object.keys(originalBids).forEach(key => {
     const newBid = Math.floor(originalBids[key] + (originalBids[key] * percentAdjustment));
-    console.log('OLD BID', originalBids[key]);
-    console.log('NEW BID', newBid);
+    console.log('KEY:', key,' OLD BID:', originalBids[key],'NEW BID', newBid);
     setSingleBid(accessToken,key,newBid);
   });
 }

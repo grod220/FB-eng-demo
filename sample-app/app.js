@@ -13,7 +13,7 @@ const biddingBands = [
                       {'upperBound': 0.2 ,'adjustment': 0},
                       {'upperBound': 0.4 ,'adjustment': -0.3},
                       {'upperBound': 0.6 ,'adjustment': -0.7},
-                      {'upperBound': Infinity,'adjustment': -1}
+                      {'upperBound': Infinity,'adjustment': -0.99}
                     ];
 
 const presenceBidding = require('../presence-bidding-module');
@@ -27,12 +27,13 @@ app.get('/api/customer-purchase', function (req, res) {
   .catch(err => res.status(500).send(err));
 });
 
-app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/index.html', {headers:{'count':currentDailyCount}});
-});
-
 app.get('/trigger', function(req, res) {
   presenceBidding.triggerAdjustment();
+  res.end('Requested');
+});
+
+app.get('/', function(req, res) {
+  res.sendFile(__dirname + '/index.html', {headers:{'count':currentDailyCount}});
 });
 
 app.listen(3000, function () {
