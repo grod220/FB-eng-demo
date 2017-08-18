@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>FB demo page</title>
+  </head>
+  <body>
+    <h1 id="current-count">10</h1>
+    <button onclick="incrementer()">Increment Transactions</button>
+    <button onclick="adjustmentRequest()">Trigger Adjustment</button>
+
+    <script>
+      const countEl = document.getElementById('current-count');
+      let currentCount = Number(countEl.innerHTML);
+      function incrementer() {
+        currentCount++;
+        countEl.innerHTML = currentCount;
+        fetch('/api/customer-purchase')
+      }
+      function adjustmentRequest() {
+        fetch('/trigger');
+      }
+    </script>
+  </body>
+</html>
